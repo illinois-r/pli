@@ -1,5 +1,5 @@
 Package: pli
-Title: What the Package Does (One Line, Title Case)
+Title: Access PrairieLearn's Web API from R
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "James Joseph",
@@ -7,10 +7,14 @@ Authors@R:
            role = c("aut", "cre", "cph"),
            email = "balamut2@illinois.edu",
            comment = c(ORCID = "0000-0003-2826-8458"))
-Description: What the package does (one paragraph).
+Description: Provides a set of functions that pulls data from PrairieLearns' 
+    Web API.
 License: GPL (>= 2)
+URL: https://github.com/illinois-r/pli
+BugReports: https://github.com/illinois-r/pli/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/coatless/pli
-BugReports: https://github.com/coatless/pli/issues
+Imports: 
+    httr
+RoxygenNote: 7.0.2
