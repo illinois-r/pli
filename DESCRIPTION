@@ -12,3 +12,5 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
+URL: https://github.com/coatless/pli
+BugReports: https://github.com/coatless/pli/issues
