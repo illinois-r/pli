@@ -63,3 +63,47 @@ We presently support:
 | `pl_assessment_instance_view()`   | View a single student instances of an assessment        |
 | `pl_assessment_submission_list()` | List of all submission underneath a specific assessment |
 | `pl_assessment_submission_view()` | View a single student submission                        |
+
+## Sample workflow
+
+First, login in to PrairieLearn and select the course you wish to obtain
+information from. The course instance number for this course can be
+obtained by looking at the URL for the class:
+
+    https://prairielearn.engr.illinois.edu/pl/course_instance/54777/instructor/instance_admin/assessments
+
+In this case, the course instance number would be `54777`. With this in
+hand, let’s query the grade book:
+
+``` r
+library(pli)
+course_instance_id = 54777
+
+## Gradebook Manipulations ---- 
+
+# Download the entire gradebook
+grades = pl_course_gradebook(course_instance_id)
+
+
+# Format for a single assessment to Compass2g
+library(tidyverse)
+grades %>% 
+  filter(assessment_id == 1228980) %>%
+  select(user_uid, points) %>%
+  mutate(
+         points = replace_na(points, 0),
+         user_uid = gsub("@.*","", user_uid)
+        ) %>%
+  write_csv("grades-quiz1.csv")
+
+## Specific assessment manipulation ----
+
+# Get an overview of all assessments
+assessments = pl_assessment_list(course_instance_id)
+
+# Retrieve scores for that instance
+quiz_1 = pl_assessment_instance_list(course_instance_id, 1228980)
+
+# Export to Compass2g
+grade_format_compass2g(quiz_1, "quiz1-stat486.csv")
+```
