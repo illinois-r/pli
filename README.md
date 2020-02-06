@@ -24,7 +24,7 @@ You can install the released version of `pli` only from
 
 ``` r
 if(!requireNamespace("devtools")) { install.packages("devtools") }
-devtools::install_githu("illinois-r/pli")
+devtools::install_github("illinois-r/pli")
 ```
 
 ### Setup
