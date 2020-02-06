@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# pli
+## pli
 
 <!-- badges: start -->
 
@@ -9,12 +9,17 @@
 status](https://github.com/illinois-r/pli/workflows/R-CMD-check/badge.svg)](https://github.com/illinois-r/pli)
 <!-- badges: end -->
 
-The goal of pli is to provide an interface to [PrairieLearn’s API
-endpoints](https://prairielearn.readthedocs.io/en/latest/api/).
+The goal of `pli` is to provide an interface to [PrairieLearn’s API
+endpoints](https://prairielearn.readthedocs.io/en/latest/api/). By
+providing a bridge to the endpoints, we can quickly import assessment
+data into *R* and perform psychometric analyses. Moreover, the data can
+automatically be moved between PrairieLearn and LMS systems that do not
+yet have an LTI connection available. ([Looking at you
+Canvas](https://github.com/PrairieLearn/PrairieLearn/issues/2015).)
 
-## Installation
+### Installation
 
-You can install the released version of pli from
+You can install the released version of `pli` only from
 [GitHub](https://github.com/illinois-r/pli) with:
 
 ``` r
@@ -22,26 +27,27 @@ if(!requireNamespace("devtools")) { install.packages("devtools") }
 devtools::install_githu("illinois-r/pli")
 ```
 
-## Setup
+### Setup
 
-Prior to using `pli`, you must create a personal access token on
+Prior to using `pli`, a personal access token (PAT) must be created on
 PrairieLearn’s production server.
 
 <https://prairielearn.engr.illinois.edu/pl/settings>
 
-Once on the page, press “(+) Generate New Token”. The token will only be
-displayed only once. Please make sure to copy the token.
+Once on the page, press “(+) Generate New Token.” The token will only be
+displayed once. Please make sure to copy the token. For `pli` to know
+about the token, please include it in `~/.Renviron` file as
+`PRAIRIELEARN_API_TOKEN`.
 
-For *R* to know about the token, please include it in your `.Renviron`
-file.
+#### Steps for using the Token in *R*
 
-Open the `~/.Renviron` file by typing:
+**First**, open the `~/.Renviron` file by typing in *R*:
 
 ``` r
 usethis::edit_r_environ()
 ```
 
-Inside the file, add the following line:
+**Second**, within the file, add the following line:
 
 ``` bash
 PRAIRIELEARN_API_TOKEN="<your-token-here>"
@@ -50,9 +56,11 @@ PRAIRIELEARN_API_TOKEN="<your-token-here>"
 Subsitute `<your-token-here>` with the token that was generated.
 (**Note:** Make sure to remove `<>`.)
 
-## Endpoints
+**Third**, save the file and restart *R* for the changes to take effect.
 
-We presently support:
+### Endpoints
+
+The package supports downloading data from the following endpoints:
 
 | Function                          | Description                                             |
 | --------------------------------- | ------------------------------------------------------- |
@@ -64,9 +72,9 @@ We presently support:
 | `pl_assessment_submission_list()` | List of all submission underneath a specific assessment |
 | `pl_assessment_submission_view()` | View a single student submission                        |
 
-## Sample workflow
+### Sample workflow
 
-First, login in to PrairieLearn and select the course you wish to obtain
+Login in to PrairieLearn and select the course you wish to obtain
 information from. The course instance number for this course can be
 obtained by looking at the URL for the class:
 
@@ -107,3 +115,11 @@ quiz_1 = pl_assessment_instance_list(course_instance_id, 1228980)
 # Export to Compass2g
 grade_format_compass2g(quiz_1, "quiz1-stat486.csv")
 ```
+
+### Author
+
+James Joseph Balamuta
+
+### License
+
+GPL (\>= 2)
